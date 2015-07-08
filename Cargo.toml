@@ -14,3 +14,10 @@ description = """
 Integer logarithm library including some bit operations.
 """
 
+[lib]
+name = "ilog2"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rust_ilog2_test"
+path = "src/main.rs"
