@@ -8,7 +8,7 @@ homepage = "https://github.com/ANLAB-KAIST/rust-ilog2"
 repository = "https://github.com/ANLAB-KAIST/rust-ilog2"
 documentation = "https://github.com/ANLAB-KAIST/rust-ilog2"
 license = "MIT"
-keywords = ["integer", "logarithm", "ilog2", "bit operation", "bitops"]
+keywords = ["integer", "logarithm", "ilog2", "bitops"]
 
 description = """
 Integer logarithm library including some bit operations.
