@@ -48,10 +48,10 @@ pub fn lsb_u32(x: u32) -> i8 {
 	let mut least_index = 32;
 	
 	for index in 0..32 {
-		let temp = x << index;
+		let temp = x << (31 -index);
 		if temp != 0 {
 			found = true;
-			if least_index > (31 -index) {
+			if least_index > index {
 				least_index = index;
 			}
 		}
