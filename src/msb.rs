@@ -1,6 +1,3 @@
-/**
-@args 
-*/
 pub fn msb_u8(x: u8) -> i8 {
 	let mut found = false;
 	let mut max_index = 0;
