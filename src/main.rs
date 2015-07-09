@@ -4,6 +4,7 @@ fn main() {
 	test_msb();
 	test_lsb();
 	test_rounddown();
+	test_roundup();
 	println!("Test Successful!");
 }
 
@@ -94,4 +95,41 @@ fn test_rounddown() {
 	assert_eq!(ilog2::rounddown_pow2_u16(U16_MID + U16_MIN), U16_MID);
 	assert_eq!(ilog2::rounddown_pow2_u32(U32_MID + U32_MIN), U32_MID);
 	assert_eq!(ilog2::rounddown_pow2_u64(U64_MID + U64_MIN), U64_MID);
+	
+	assert_eq!(ilog2::rounddown_pow2_u8(U8_MAX), U8_MID);
+	assert_eq!(ilog2::rounddown_pow2_u16(U16_MAX), U16_MID);
+	assert_eq!(ilog2::rounddown_pow2_u32(U32_MAX), U32_MID);
+	assert_eq!(ilog2::rounddown_pow2_u64(U64_MAX), U64_MID);
+}
+
+fn test_roundup() {
+	const U8_MIN : u8 = 1u8;
+	const U16_MIN : u16 = 1u16;
+	const U32_MIN : u32 = 1u32;
+	const U64_MIN : u64 = 1u64;
+	
+	const U8_MID : u8 = 0x80u8;
+	const U16_MID : u16 = 0x8000u16;
+	const U32_MID : u32 = 0x80000000u32;
+	const U64_MID : u64 = 0x8000000000000000u64;
+	
+	const U8_MAX : u8 = 0xFFu8;
+	const U16_MAX : u16 = 0xFFFFu16;
+	const U32_MAX : u32 = 0xFFFFFFFFu32;
+	const U64_MAX : u64 = 0xFFFFFFFFFFFFFFFFu64;
+	
+	assert_eq!(ilog2::roundup_pow2_u8(U8_MIN), 1);
+	assert_eq!(ilog2::roundup_pow2_u16(U16_MIN), 1);
+	assert_eq!(ilog2::roundup_pow2_u32(U32_MIN), 1);
+	assert_eq!(ilog2::roundup_pow2_u64(U64_MIN), 1);
+	
+	assert_eq!(ilog2::roundup_pow2_u8((U8_MID >> 1) + U8_MIN), U8_MID);
+	assert_eq!(ilog2::roundup_pow2_u16((U16_MID >> 1) + U16_MIN), U16_MID);
+	assert_eq!(ilog2::roundup_pow2_u32((U32_MID >> 1) + U32_MIN), U32_MID);
+	assert_eq!(ilog2::roundup_pow2_u64((U64_MID >> 1) + U64_MIN), U64_MID);
+	
+	assert_eq!(ilog2::roundup_pow2_u8(U8_MAX >> 1), U8_MID);
+	assert_eq!(ilog2::roundup_pow2_u16(U16_MAX >> 1), U16_MID);
+	assert_eq!(ilog2::roundup_pow2_u32(U32_MAX >> 1), U32_MID);
+	assert_eq!(ilog2::roundup_pow2_u64(U64_MAX >> 1), U64_MID);
 }
