@@ -1,86 +1,40 @@
-/**
-@args 
-*/
-pub fn lsb_u8(x: u8) -> i8 {
-	let mut found = false;
-	let mut least_index = 8;
-	
-	for index in 0..8 {
-		let temp = x << (7 -index);
-		if temp != 0 {
-			found = true;
-			if least_index > index {
-				least_index = index;
-			}
-		}
-	}
-	
-	if found {
-		least_index
-	} else {
-		-1i8
-	}
+use bitops::*;
+
+pub trait LSB {
+    fn lsb(x: Self) -> i8;
 }
 
-pub fn lsb_u16(x: u16) -> i8 {
-	let mut found = false;
-	let mut least_index = 16;
-	
-	for index in 0..16 {
-		let temp = x << (15 - index);
-		if temp != 0 {
-			found = true;
-			if least_index > index {
-				least_index = index;
-			}
-		}
-	}
-	
-	if found {
-		least_index
-	} else {
-		-1i8
-	}
+pub fn lsb<T: LSB>(x: T) -> i8 {
+    T::lsb(x)
 }
 
-pub fn lsb_u32(x: u32) -> i8 {
-	let mut found = false;
-	let mut least_index = 32;
-	
-	for index in 0..32 {
-		let temp = x << (31 -index);
-		if temp != 0 {
-			found = true;
-			if least_index > index {
-				least_index = index;
+macro_rules! lsb_impl {
+    ( $t:ty) => {
+        impl LSB for $t { fn lsb(x: $t) -> i8 {
+	    	let mut found = false;
+			let mut least_index = bit_length::<$t>();
+			let bitlen = bit_length::<$t>();
+			
+			for index in 0..bitlen {
+				let temp = x << (bitlen - 1 -index);
+				if temp != 0 {
+					found = true;
+					if least_index > index {
+						least_index = index;
+					}
+				}
 			}
-		}
-	}
-	
-	if found {
-		least_index
-	} else {
-		-1i8
-	}
+			
+			if found {
+				least_index as i8
+			} else {
+				-1i8
+			}
+	    }}
+    };
 }
 
-pub fn lsb_u64(x: u64) -> i8 {
-	let mut found = false;
-	let mut least_index = 64;
-	
-	for index in 0..64 {
-		let temp = x << (63 -index);
-		if temp != 0 {
-			found = true;
-			if least_index > index {
-				least_index = index;
-			}
-		}
-	}
-	
-	if found {
-		least_index
-	} else {
-		-1i8
-	}
-}
+lsb_impl!(u8);
+lsb_impl!(u16);
+lsb_impl!(u32);
+lsb_impl!(u64);

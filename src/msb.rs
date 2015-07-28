@@ -1,83 +1,40 @@
-pub fn msb_u8(x: u8) -> i8 {
-	let mut found = false;
-	let mut max_index = 0;
-	
-	for index in 0..8 {
-		let temp = x >> index;
-		if temp != 0 {
-			found = true;
-			if max_index < index {
-				max_index = index;
-			}
-		}
-	}
-	
-	if found {
-		max_index
-	} else {
-		-1i8
-	}
+use bitops::*;
+
+pub trait MSB {
+    fn msb(x: Self) -> i8;
 }
 
-pub fn msb_u16(x: u16) -> i8 {
-	let mut found = false;
-	let mut max_index = 0;
-	
-	for index in 0..16 {
-		let temp = x >> index;
-		if temp != 0 {
-			found = true;
-			if max_index < index {
-				max_index = index;
-			}
-		}
-	}
-	
-	if found {
-		max_index
-	} else {
-		-1i8
-	}
+pub fn msb<T: MSB>(x: T) -> i8 {
+    T::msb(x)
 }
 
-pub fn msb_u32(x: u32) -> i8 {
-	let mut found = false;
-	let mut max_index = 0;
-	
-	for index in 0..32 {
-		let temp = x >> index;
-		if temp != 0 {
-			found = true;
-			if max_index < index {
-				max_index = index;
+macro_rules! msb_impl {
+    ( $t:ty) => {
+        impl MSB for $t { fn msb(x: $t) -> i8 {
+	    	let mut found = false;
+			let mut max_index = 0;
+			let bitlen = bit_length::<$t>();
+			
+			for index in 0..bitlen{
+				let temp = x >> index;
+				if temp != 0 {
+					found = true;
+					if max_index < index {
+						max_index = index;
+					}
+				}
 			}
-		}
-	}
-	
-	if found {
-		max_index
-	} else {
-		-1i8
-	}
+			
+			if found {
+				max_index as i8
+			} else {
+				-1i8
+			}
+	    }}
+    };
 }
 
-pub fn msb_u64(x: u64) -> i8 {
-	let mut found = false;
-	let mut max_index = 0;
-	
-	for index in 0..64 {
-		let temp = x >> index;
-		if temp != 0 {
-			found = true;
-			if max_index < index {
-				max_index = index;
-			}
-		}
-	}
-	
-	if found {
-		max_index
-	} else {
-		-1i8
-	}
-}
+msb_impl!(u8);
+msb_impl!(u16);
+msb_impl!(u32);
+msb_impl!(u64);
