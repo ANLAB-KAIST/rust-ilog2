@@ -1,7 +1,7 @@
 use bitops::*;
 
-pub fn flz<T: Bitops>(x: T) -> i8 {
-    msz(x) + 1
+pub fn flz<T: Bitops>(x: T) -> u8 {
+    (msz(x) + 1) as u8
 }
 
 pub fn msz<T: Bitops>(x: T) -> i8 {

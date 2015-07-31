@@ -1,7 +1,7 @@
 use bitops::*;
 
-pub fn ffs<T: Bitops>(x: T) -> i8 {
-    lsb(x) + 1
+pub fn ffs<T: Bitops>(x: T) -> u8 {
+    (lsb(x) + 1) as u8
 }
 
 pub fn lsb<T: Bitops>(x: T) -> i8 {
