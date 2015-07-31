@@ -1,6 +1,6 @@
-//Thanks to sanxiyn at irc.orinzer.org
+extern crate num;
 
-pub trait Bitops {
+pub trait Bitops: num::PrimInt {
     fn bit_length() -> usize;
     fn bit_mask() -> Self;
 }
