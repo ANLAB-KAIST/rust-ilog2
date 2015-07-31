@@ -19,25 +19,25 @@ pub fn roundup_pow2<T: Rounding>(x: T) -> T {
 macro_rules! rounding_impl {
     ( $t:ty) => {
         impl Rounding for $t {
-        	fn rounddown_pow2(x: $t) -> $t {
-		    	let msb_index = msb(x);
-				let one: $t = 1;
-				assert!(msb_index >= 0);
-				one << msb_index
-		    }
-        	fn roundup_pow2(x: $t) -> $t {
-		    	let mut msb_index = msb(x);
-				let lsb_index = lsb(x);
-				let one: $t = 1;
-				let bitlen = bit_length::<$t>();
-				assert!(msb_index >= 0 && lsb_index >= 0);
-				if msb_index != lsb_index {
-					msb_index += 1;
-				}
-				assert!(msb_index < bitlen as i8);
-				one << msb_index
-		    }
-       	}
+            fn rounddown_pow2(x: $t) -> $t {
+                let msb_index = msb(x);
+                let one: $t = 1;
+                assert!(msb_index >= 0);
+                one << msb_index
+            }
+            fn roundup_pow2(x: $t) -> $t {
+                let mut msb_index = msb(x);
+                let lsb_index = lsb(x);
+                let one: $t = 1;
+                let bitlen = bit_length::<$t>();
+                assert!(msb_index >= 0 && lsb_index >= 0);
+                if msb_index != lsb_index {
+                    msb_index += 1;
+                }
+                assert!(msb_index < bitlen as i8);
+                one << msb_index
+            }
+           }
     };
 }
 
