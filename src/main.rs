@@ -1,11 +1,39 @@
 extern crate ilog2;
 
 fn main() {
+	test_bitops();
 	test_msb();
 	test_lsb();
 	test_rounddown();
 	test_roundup();
 	println!("Test Successful!");
+}
+
+fn test_bitops() {
+	assert_eq!(ilog2::bit_length::<u8>(), 8usize);
+	assert_eq!(ilog2::bit_length::<u16>(), 16usize);
+	assert_eq!(ilog2::bit_length::<u32>(), 32usize);
+	assert_eq!(ilog2::bit_length::<u64>(), 64usize);
+	
+	const U8_CONST1 : u8 = 0b10101010;
+	const U16_CONST1 : u16 = 0b1010101010101010;
+	const U32_CONST1 : u32 = 0b10101010101010101010101010101010;
+	const U64_CONST1 : u64 = 0b1010101010101010101010101010101010101010101010101010101010101010;
+	
+	const U8_CONST2 : u8 = 0b01010101;
+	const U16_CONST2 : u16 = 0b0101010101010101;
+	const U32_CONST2 : u32 = 0b01010101010101010101010101010101;
+	const U64_CONST2 : u64 = 0b0101010101010101010101010101010101010101010101010101010101010101;
+	
+	assert_eq!(ilog2::bit_mask::<u8>() & U8_CONST1, U8_CONST1);
+	assert_eq!(ilog2::bit_mask::<u16>() & U16_CONST1, U16_CONST1);
+	assert_eq!(ilog2::bit_mask::<u32>() & U32_CONST1, U32_CONST1);
+	assert_eq!(ilog2::bit_mask::<u64>() & U64_CONST1, U64_CONST1);
+	
+	assert_eq!(ilog2::bit_mask::<u8>() & U8_CONST2, U8_CONST2);
+	assert_eq!(ilog2::bit_mask::<u16>() & U16_CONST2, U16_CONST2);
+	assert_eq!(ilog2::bit_mask::<u32>() & U32_CONST2, U32_CONST2);
+	assert_eq!(ilog2::bit_mask::<u64>() & U64_CONST2, U64_CONST2);
 }
 
 fn test_msb() {
