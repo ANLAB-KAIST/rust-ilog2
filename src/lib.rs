@@ -1,9 +1,11 @@
-mod msb;
-mod lsb;
+mod future;
 mod bitops;
+mod ffs;
+mod fls;
 mod rounding;
 
+pub use future::*;
 pub use bitops::*;
-pub use msb::*;
-pub use lsb::*;
+pub use ffs::*;
+pub use fls::*;
 pub use rounding::*;
