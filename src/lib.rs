@@ -1,4 +1,4 @@
-mod future;
+pub mod future;
 mod bitops;
 mod ffs;
 mod fls;
