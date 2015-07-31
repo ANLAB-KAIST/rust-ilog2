@@ -3,7 +3,9 @@ extern crate ilog2;
 fn main() {
     test_bitops();
     test_msb();
+    test_fls();
     test_lsb();
+    test_ffs();
     test_rounddown();
     test_roundup();
     println!("Test Successful!");
@@ -67,6 +69,37 @@ fn test_msb() {
     assert_eq!(ilog2::msb(9223372036854775808u64 + 1u64), 63i8);
 }
 
+fn test_fls() {
+    assert_eq!(ilog2::fls(128u8), 8i8);
+    assert_eq!(ilog2::fls(1u8), 1i8);
+    assert_eq!(ilog2::fls(0u8), 0i8);
+    assert_eq!(ilog2::fls(128u8 + 1u8), 8i8);
+    
+    assert_eq!(ilog2::fls(32768u16), 16i8);
+    assert_eq!(ilog2::fls(128u16), 8i8);
+    assert_eq!(ilog2::fls(1u16), 1i8);
+    assert_eq!(ilog2::fls(0u16), 0i8);
+    assert_eq!(ilog2::fls(128u16 + 1u16), 8i8);
+    assert_eq!(ilog2::fls(32768u16 + 1u16), 16i8);
+    
+    assert_eq!(ilog2::fls(2147483648u32), 32i8);
+    assert_eq!(ilog2::fls(128u32), 8i8);
+    assert_eq!(ilog2::fls(1u32), 1i8);
+    assert_eq!(ilog2::fls(0u32), 0i8);
+    assert_eq!(ilog2::fls(128u32 + 1u32), 8i8);
+    assert_eq!(ilog2::fls(32768u32 + 1u32), 16i8);
+    assert_eq!(ilog2::fls(2147483648u32 + 1u32), 32i8);
+    
+    assert_eq!(ilog2::fls(9223372036854775808u64), 64i8);
+    assert_eq!(ilog2::fls(128u64), 8i8);
+    assert_eq!(ilog2::fls(1u64), 1i8);
+    assert_eq!(ilog2::fls(0u64), 0i8);
+    assert_eq!(ilog2::fls(128u64 + 1u64), 8i8);
+    assert_eq!(ilog2::fls(32768u64 + 1u64), 16i8);
+    assert_eq!(ilog2::fls(2147483648u64 + 1u64), 32i8);
+    assert_eq!(ilog2::fls(9223372036854775808u64 + 1u64), 64i8);
+}
+
 fn test_lsb() {
     assert_eq!(ilog2::lsb(128u8), 7i8);
     assert_eq!(ilog2::lsb(1u8), 0i8);
@@ -96,6 +129,37 @@ fn test_lsb() {
     assert_eq!(ilog2::lsb(32768u64 + 1u64), 0i8);
     assert_eq!(ilog2::lsb(2147483648u64 + 1u64), 0i8);
     assert_eq!(ilog2::lsb(9223372036854775808u64 + 1u64), 0i8);
+}
+
+fn test_ffs() {
+    assert_eq!(ilog2::ffs(128u8), 8i8);
+    assert_eq!(ilog2::ffs(1u8), 1i8);
+    assert_eq!(ilog2::ffs(0u8), 0i8);
+    assert_eq!(ilog2::ffs(128u8 + 1u8), 1i8);
+    
+    assert_eq!(ilog2::ffs(32768u16), 16i8);
+    assert_eq!(ilog2::ffs(128u16), 8i8);
+    assert_eq!(ilog2::ffs(1u16), 1i8);
+    assert_eq!(ilog2::ffs(0u16), 0i8);
+    assert_eq!(ilog2::ffs(128u16 + 1u16), 1i8);
+    assert_eq!(ilog2::ffs(32768u16 + 1u16), 1i8);
+    
+    assert_eq!(ilog2::ffs(2147483648u32), 32i8);
+    assert_eq!(ilog2::ffs(128u32), 8i8);
+    assert_eq!(ilog2::ffs(1u32), 1i8);
+    assert_eq!(ilog2::ffs(0u32), 0i8);
+    assert_eq!(ilog2::ffs(128u32 + 1u32), 1i8);
+    assert_eq!(ilog2::ffs(32768u32 + 1u32), 1i8);
+    assert_eq!(ilog2::ffs(2147483648u32 + 1u32), 1i8);
+    
+    assert_eq!(ilog2::ffs(9223372036854775808u64), 64i8);
+    assert_eq!(ilog2::ffs(128u64), 8i8);
+    assert_eq!(ilog2::ffs(1u64), 1i8);
+    assert_eq!(ilog2::ffs(0u64), 0i8);
+    assert_eq!(ilog2::ffs(128u64 + 1u64), 1i8);
+    assert_eq!(ilog2::ffs(32768u64 + 1u64), 1i8);
+    assert_eq!(ilog2::ffs(2147483648u64 + 1u64), 1i8);
+    assert_eq!(ilog2::ffs(9223372036854775808u64 + 1u64), 1i8);
 }
 
 fn test_rounddown() {
