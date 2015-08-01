@@ -1,7 +1,7 @@
 extern crate num;
-use future::*;
+use extension::*;
 
-pub trait Bitops: num::PrimInt + num::Unsigned + Future {
+pub trait Bitops: num::PrimInt + num::Unsigned + PrimIntExt {
     fn bit_length() -> usize;
     fn bit_mask() -> Self;
 }
