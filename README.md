@@ -1,4 +1,5 @@
 #Integer Logarithm Library for Rust
+[![Build Status](https://travis-ci.org/ANLAB-KAIST/rust-ilog2.svg?branch=master)](https://travis-ci.org/ANLAB-KAIST/rust-ilog2)
 
 ##API List
 
